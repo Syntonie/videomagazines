@@ -1,0 +1,573 @@
+--A1L4 is osc_in~2
+A1L4_or_out = !osc_in;
+A1L4 = A1L4_or_out;
+
+
+--J1_dffs[0] is pwm_10bit:inst2|lpm_counter:count_rtl_0|dffs[0]
+J1_dffs[0]_p1_out = !J1_dffs[0] & !reset & !J1_dffs[8];
+J1_dffs[0]_p2_out = !J1_dffs[0] & !reset & !J1_dffs[7] & !J1_dffs[6];
+J1_dffs[0]_or_out = J1_dffs[0]_p1_out # J1_dffs[0]_p2_out;
+J1_dffs[0]_reg_input = J1_dffs[0]_or_out;
+J1_dffs[0] = DFFE(J1_dffs[0]_reg_input, GLOBAL(clk), , , );
+
+
+--J1_dffs[1] is pwm_10bit:inst2|lpm_counter:count_rtl_0|dffs[1]
+J1_dffs[1]_p1_out = !J1_dffs[8] & !reset & J1_dffs[1] & !J1_dffs[0];
+J1_dffs[1]_p2_out = !J1_dffs[8] & !reset & !J1_dffs[1] & J1_dffs[0];
+J1_dffs[1]_p3_out = !reset & J1_dffs[1] & !J1_dffs[0] & !J1_dffs[7] & !J1_dffs[6];
+J1_dffs[1]_p4_out = !reset & !J1_dffs[1] & J1_dffs[0] & !J1_dffs[7] & !J1_dffs[6];
+J1_dffs[1]_or_out = J1_dffs[1]_p1_out # J1_dffs[1]_p2_out # J1_dffs[1]_p3_out # J1_dffs[1]_p4_out;
+J1_dffs[1]_reg_input = J1_dffs[1]_or_out;
+J1_dffs[1] = DFFE(J1_dffs[1]_reg_input, GLOBAL(clk), , , );
+
+
+--J1_dffs[2] is pwm_10bit:inst2|lpm_counter:count_rtl_0|dffs[2]
+J1_dffs[2]_p0_out = !reset & !J1_dffs[2] & J1_dffs[0] & J1_dffs[1] & !J1_dffs[7] & !J1_dffs[6];
+J1_dffs[2]_p1_out = !J1_dffs[8] & !reset & J1_dffs[2] & !J1_dffs[0];
+J1_dffs[2]_p2_out = !J1_dffs[8] & !reset & !J1_dffs[2] & J1_dffs[0] & J1_dffs[1];
+J1_dffs[2]_p3_out = !reset & J1_dffs[2] & !J1_dffs[1] & !J1_dffs[7] & !J1_dffs[6];
+J1_dffs[2]_p4_out = !reset & J1_dffs[2] & !J1_dffs[0] & !J1_dffs[7] & !J1_dffs[6];
+J1_dffs[2]_or_out = J1L5 # J1_dffs[2]_p0_out # J1_dffs[2]_p1_out # J1_dffs[2]_p2_out # J1_dffs[2]_p3_out # J1_dffs[2]_p4_out;
+J1_dffs[2]_reg_input = J1_dffs[2]_or_out;
+J1_dffs[2] = DFFE(J1_dffs[2]_reg_input, GLOBAL(clk), , , );
+
+
+--J1_dffs[3] is pwm_10bit:inst2|lpm_counter:count_rtl_0|dffs[3]
+J1_dffs[3]_p0_out = J1_dffs[2] & J1_dffs[1] & J1_dffs[0] & J1_dffs[3];
+J1_dffs[3]_p1_out = !J1_dffs[7] & !J1_dffs[6] & !reset & J1_dffs[2] & J1_dffs[1] & J1_dffs[0];
+J1_dffs[3]_p2_out = J1_dffs[7] & J1_dffs[8] & J1_dffs[3];
+J1_dffs[3]_p3_out = J1_dffs[6] & J1_dffs[8] & J1_dffs[3];
+J1_dffs[3]_p4_out = reset & J1_dffs[3];
+J1_dffs[3]_or_out = J1L7 # J1_dffs[3]_p0_out # J1_dffs[3]_p1_out # J1_dffs[3]_p2_out # J1_dffs[3]_p3_out # J1_dffs[3]_p4_out;
+J1_dffs[3]_reg_input = J1_dffs[3]_or_out;
+J1_dffs[3] = TFFE(J1_dffs[3]_reg_input, GLOBAL(clk), , , );
+
+
+--J1_dffs[4] is pwm_10bit:inst2|lpm_counter:count_rtl_0|dffs[4]
+J1_dffs[4]_p0_out = J1_dffs[3] & J1_dffs[2] & J1_dffs[1] & J1_dffs[0] & J1_dffs[4];
+J1_dffs[4]_p1_out = !J1_dffs[7] & !J1_dffs[6] & !reset & J1_dffs[3] & J1_dffs[2] & J1_dffs[1] & J1_dffs[0];
+J1_dffs[4]_p2_out = J1_dffs[7] & J1_dffs[8] & J1_dffs[4];
+J1_dffs[4]_p3_out = J1_dffs[6] & J1_dffs[8] & J1_dffs[4];
+J1_dffs[4]_p4_out = reset & J1_dffs[4];
+J1_dffs[4]_or_out = J1L9 # J1_dffs[4]_p0_out # J1_dffs[4]_p1_out # J1_dffs[4]_p2_out # J1_dffs[4]_p3_out # J1_dffs[4]_p4_out;
+J1_dffs[4]_reg_input = J1_dffs[4]_or_out;
+J1_dffs[4] = TFFE(J1_dffs[4]_reg_input, GLOBAL(clk), , , );
+
+
+--J1_dffs[5] is pwm_10bit:inst2|lpm_counter:count_rtl_0|dffs[5]
+J1_dffs[5]_p0_out = J1_dffs[4] & J1_dffs[3] & J1_dffs[2] & J1_dffs[1] & J1_dffs[0] & J1_dffs[5];
+J1_dffs[5]_p1_out = !J1_dffs[7] & !J1_dffs[6] & !reset & J1_dffs[4] & J1_dffs[3] & J1_dffs[2] & J1_dffs[1] & J1_dffs[0];
+J1_dffs[5]_p2_out = J1_dffs[7] & J1_dffs[8] & J1_dffs[5];
+J1_dffs[5]_p3_out = J1_dffs[6] & J1_dffs[8] & J1_dffs[5];
+J1_dffs[5]_p4_out = reset & J1_dffs[5];
+J1_dffs[5]_or_out = J1L11 # J1_dffs[5]_p0_out # J1_dffs[5]_p1_out # J1_dffs[5]_p2_out # J1_dffs[5]_p3_out # J1_dffs[5]_p4_out;
+J1_dffs[5]_reg_input = J1_dffs[5]_or_out;
+J1_dffs[5] = TFFE(J1_dffs[5]_reg_input, GLOBAL(clk), , , );
+
+
+--J1_dffs[6] is pwm_10bit:inst2|lpm_counter:count_rtl_0|dffs[6]
+J1_dffs[6]_p1_out = !J1_dffs[8] & !reset & J1_dffs[5] & J1_dffs[4] & J1_dffs[3] & J1_dffs[2] & J1_dffs[1] & J1_dffs[0];
+J1_dffs[6]_p2_out = !reset & J1_dffs[5] & J1_dffs[4] & J1_dffs[3] & J1_dffs[2] & J1_dffs[1] & J1_dffs[0] & !J1_dffs[7];
+J1_dffs[6]_p3_out = J1_dffs[8] & J1_dffs[6];
+J1_dffs[6]_p4_out = reset & J1_dffs[6];
+J1_dffs[6]_or_out = J1_dffs[6]_p1_out # J1_dffs[6]_p2_out # J1_dffs[6]_p3_out # J1_dffs[6]_p4_out;
+J1_dffs[6]_reg_input = J1_dffs[6]_or_out;
+J1_dffs[6] = TFFE(J1_dffs[6]_reg_input, GLOBAL(clk), , , );
+
+
+--J1_dffs[7] is pwm_10bit:inst2|lpm_counter:count_rtl_0|dffs[7]
+J1_dffs[7]_p1_out = !reset & !J1_dffs[8] & J1_dffs[6] & J1_dffs[5] & J1_dffs[4] & J1_dffs[3] & J1_dffs[2] & J1_dffs[1] & J1_dffs[0];
+J1_dffs[7]_p2_out = reset & J1_dffs[7];
+J1_dffs[7]_p3_out = J1_dffs[8] & J1_dffs[7];
+J1_dffs[7]_or_out = J1_dffs[7]_p1_out # J1_dffs[7]_p2_out # J1_dffs[7]_p3_out;
+J1_dffs[7]_reg_input = J1_dffs[7]_or_out;
+J1_dffs[7] = TFFE(J1_dffs[7]_reg_input, GLOBAL(clk), , , );
+
+
+--J1_dffs[8] is pwm_10bit:inst2|lpm_counter:count_rtl_0|dffs[8]
+J1_dffs[8]_p1_out = J1_dffs[5] & J1_dffs[4] & J1_dffs[3] & J1_dffs[2] & J1_dffs[1] & !reset & J1_dffs[7] & J1_dffs[6] & !J1_dffs[8] & J1_dffs[0];
+J1_dffs[8]_p2_out = !reset & !J1_dffs[7] & !J1_dffs[6] & J1_dffs[8];
+J1_dffs[8]_or_out = J1_dffs[8]_p1_out # J1_dffs[8]_p2_out;
+J1_dffs[8]_reg_input = J1_dffs[8]_or_out;
+J1_dffs[8] = DFFE(J1_dffs[8]_reg_input, GLOBAL(clk), , , );
+
+
+--C1_endlinereg is pwm_10bit:inst2|endlinereg
+C1_endlinereg_p1_out = J1_dffs[8] & !J1_dffs[7] & !J1_dffs[6] & J1_dffs[5] & J1_dffs[4] & J1_dffs[3] & J1_dffs[2] & J1_dffs[1] & J1_dffs[0];
+C1_endlinereg_or_out = C1_endlinereg_p1_out;
+C1_endlinereg_reg_input = C1_endlinereg_or_out;
+C1_endlinereg = DFFE(C1_endlinereg_reg_input, GLOBAL(clk), , , !reset);
+
+
+--B1_count[4] is sync_state:inst|count[4]
+B1_count[4]_p0_out = B1_count[4] & reset;
+B1_count[4]_p1_out = B1_count[5] & B1_count[6] & B1_count[7] & B1_count[10] & C1_endlinereg & B1_count[4];
+B1_count[4]_p2_out = B1_count[10] & C1_endlinereg & B1_count[4] & B1_count[9];
+B1_count[4]_p3_out = B1_count[10] & C1_endlinereg & B1_count[4] & B1_count[8];
+B1_count[4]_p4_out = C1_endlinereg & B1_count[4] & B1_count[3] & B1_count[2] & B1_count[1] & B1_count[0];
+B1_count[4]_or_out = A1L7 # B1_count[4]_p0_out # B1_count[4]_p1_out # B1_count[4]_p2_out # B1_count[4]_p3_out # B1_count[4]_p4_out;
+B1_count[4]_reg_input = B1_count[4]_or_out;
+B1_count[4] = TFFE(B1_count[4]_reg_input, GLOBAL(clk), , , );
+
+
+--B1_count[0] is sync_state:inst|count[0]
+B1_count[0]_p0_out = !reset & !C1_endlinereg & B1_count[0];
+B1_count[0]_p1_out = !B1_count[5] & !B1_count[9] & !B1_count[8] & !reset & C1_endlinereg & !B1_count[0];
+B1_count[0]_p2_out = !B1_count[9] & !B1_count[8] & !reset & C1_endlinereg & !B1_count[0] & !B1_count[6];
+B1_count[0]_p3_out = !B1_count[9] & !B1_count[8] & !reset & C1_endlinereg & !B1_count[0] & !B1_count[7];
+B1_count[0]_p4_out = !B1_count[9] & !B1_count[8] & !reset & C1_endlinereg & !B1_count[0] & !B1_count[4] & !B1_count[3] & !B1_count[2] & !B1_count[1];
+B1_count[0]_or_out = A1L8 # B1_count[0]_p0_out # B1_count[0]_p1_out # B1_count[0]_p2_out # B1_count[0]_p3_out # B1_count[0]_p4_out;
+B1_count[0]_reg_input = B1_count[0]_or_out;
+B1_count[0] = DFFE(B1_count[0]_reg_input, GLOBAL(clk), , , );
+
+
+--B1_count[5] is sync_state:inst|count[5]
+B1_count[5]_p0_out = !reset & B1_count[5] & B1_count[10] & C1_endlinereg & B1_count[8];
+B1_count[5]_p1_out = !reset & B1_count[5] & B1_count[10] & B1_count[4] & C1_endlinereg & B1_count[6] & B1_count[7];
+B1_count[5]_p2_out = !reset & !B1_count[10] & B1_count[4] & C1_endlinereg & B1_count[3] & B1_count[0] & B1_count[2] & B1_count[1];
+B1_count[5]_p3_out = !reset & B1_count[4] & C1_endlinereg & B1_count[3] & B1_count[0] & B1_count[2] & B1_count[1] & !B1_count[9] & !B1_count[8];
+B1_count[5]_p4_out = !reset & B1_count[5] & B1_count[10] & C1_endlinereg & B1_count[9];
+B1_count[5]_or_out = A1L9 # B1_count[5]_p0_out # B1_count[5]_p1_out # B1_count[5]_p2_out # B1_count[5]_p3_out # B1_count[5]_p4_out;
+B1_count[5]_reg_input = B1_count[5]_or_out;
+B1_count[5] = TFFE(B1_count[5]_reg_input, GLOBAL(clk), , , );
+
+
+--B1_count[6] is sync_state:inst|count[6]
+B1_count[6]_p0_out = !reset & B1_count[6] & B1_count[10] & C1_endlinereg & B1_count[8];
+B1_count[6]_p1_out = !reset & B1_count[6] & B1_count[10] & B1_count[5] & B1_count[4] & C1_endlinereg & B1_count[7];
+B1_count[6]_p2_out = !reset & !B1_count[10] & B1_count[5] & B1_count[4] & C1_endlinereg & B1_count[3] & B1_count[0] & B1_count[2] & B1_count[1];
+B1_count[6]_p3_out = !reset & B1_count[5] & B1_count[4] & C1_endlinereg & B1_count[3] & B1_count[0] & B1_count[2] & B1_count[1] & !B1_count[9] & !B1_count[8];
+B1_count[6]_p4_out = !reset & B1_count[6] & B1_count[10] & C1_endlinereg & B1_count[9];
+B1_count[6]_or_out = A1L01 # B1_count[6]_p0_out # B1_count[6]_p1_out # B1_count[6]_p2_out # B1_count[6]_p3_out # B1_count[6]_p4_out;
+B1_count[6]_reg_input = B1_count[6]_or_out;
+B1_count[6] = TFFE(B1_count[6]_reg_input, GLOBAL(clk), , , );
+
+
+--B1_count[7] is sync_state:inst|count[7]
+B1_count[7]_p0_out = B1_count[5] & !B1_count[7] & B1_count[6] & B1_count[4] & B1_count[3] & B1_count[0] & B1_count[2] & B1_count[1] & C1_endlinereg & !B1_count[10];
+B1_count[7]_p2_out = B1_count[7] & !B1_count[4] & !B1_count[10];
+B1_count[7]_p3_out = !B1_count[5] & B1_count[7] & !B1_count[10];
+B1_count[7]_p4_out = B1_count[7] & !B1_count[6] & !B1_count[10];
+B1_count[7]_or_out = A1L21 # B1_count[7]_p0_out # reset # B1_count[7]_p2_out # B1_count[7]_p3_out # B1_count[7]_p4_out;
+B1_count[7]_reg_input = B1_count[7]_or_out;
+B1_count[7] = DFFE(B1_count[7]_reg_input, GLOBAL(clk), , , );
+
+
+--B1_count[8] is sync_state:inst|count[8]
+B1_count[8]_p1_out = reset & !B1_count[8];
+B1_count[8]_p2_out = !reset & !B1_count[10] & B1_count[6] & B1_count[7] & B1_count[5] & B1_count[4] & B1_count[3] & B1_count[2] & B1_count[1] & B1_count[0] & C1_endlinereg;
+B1_count[8]_p3_out = !reset & B1_count[8] & B1_count[10] & C1_endlinereg;
+B1_count[8]_or_out = B1_count[8]_p1_out # B1_count[8]_p2_out # B1_count[8]_p3_out;
+B1_count[8]_reg_input = B1_count[8]_or_out;
+B1_count[8] = TFFE(B1_count[8]_reg_input, GLOBAL(clk), , , );
+
+
+--B1_count[9] is sync_state:inst|count[9]
+B1_count[9]_p1_out = reset & !B1_count[9];
+B1_count[9]_p2_out = !reset & !B1_count[10] & B1_count[8] & B1_count[6] & B1_count[7] & B1_count[5] & B1_count[4] & B1_count[3] & B1_count[2] & B1_count[1] & B1_count[0] & C1_endlinereg;
+B1_count[9]_p3_out = !reset & B1_count[9] & B1_count[10] & C1_endlinereg;
+B1_count[9]_or_out = B1_count[9]_p1_out # B1_count[9]_p2_out # B1_count[9]_p3_out;
+B1_count[9]_reg_input = B1_count[9]_or_out;
+B1_count[9] = TFFE(B1_count[9]_reg_input, GLOBAL(clk), , , );
+
+
+--B1_count[10] is sync_state:inst|count[10]
+B1_count[10]_p0_out = !reset & B1_count[10] & !C1_endlinereg;
+B1_count[10]_p1_out = !B1_count[5] & !B1_count[9] & !B1_count[8] & !reset & B1_count[10];
+B1_count[10]_p2_out = !B1_count[9] & !B1_count[8] & !reset & B1_count[10] & !B1_count[6];
+B1_count[10]_p3_out = !B1_count[9] & !B1_count[8] & !reset & B1_count[10] & !B1_count[7];
+B1_count[10]_p4_out = !B1_count[9] & !B1_count[8] & !reset & B1_count[10] & !B1_count[4] & !B1_count[3] & !B1_count[0] & !B1_count[2] & !B1_count[1];
+B1_count[10]_or_out = A1L31 # B1_count[10]_p0_out # B1_count[10]_p1_out # B1_count[10]_p2_out # B1_count[10]_p3_out # B1_count[10]_p4_out;
+B1_count[10]_reg_input = B1_count[10]_or_out;
+B1_count[10] = DFFE(B1_count[10]_reg_input, GLOBAL(clk), , , );
+
+
+--B1_count[1] is sync_state:inst|count[1]
+B1_count[1]_p1_out = B1_count[10] & C1_endlinereg & B1_count[8];
+B1_count[1]_p2_out = C1_endlinereg & B1_count[1] & B1_count[0];
+B1_count[1]_p3_out = !B1_count[1] & !B1_count[0];
+B1_count[1]_p4_out = !C1_endlinereg & !B1_count[1];
+B1_count[1]_or_out = A1L41 # reset # B1_count[1]_p1_out # B1_count[1]_p2_out # B1_count[1]_p3_out # B1_count[1]_p4_out;
+B1_count[1]_reg_input = !(B1_count[1]_or_out);
+B1_count[1] = DFFE(B1_count[1]_reg_input, GLOBAL(clk), , , );
+
+
+--B1_count[2] is sync_state:inst|count[2]
+B1_count[2]_p1_out = C1_endlinereg & B1_count[2] & B1_count[1] & B1_count[0];
+B1_count[2]_p2_out = !B1_count[2] & !B1_count[1];
+B1_count[2]_p3_out = !B1_count[2] & !B1_count[0];
+B1_count[2]_p4_out = !C1_endlinereg & !B1_count[2];
+B1_count[2]_or_out = A1L51 # reset # B1_count[2]_p1_out # B1_count[2]_p2_out # B1_count[2]_p3_out # B1_count[2]_p4_out;
+B1_count[2]_reg_input = !(B1_count[2]_or_out);
+B1_count[2] = DFFE(B1_count[2]_reg_input, GLOBAL(clk), , , );
+
+
+--B1_count[3] is sync_state:inst|count[3]
+B1_count[3]_p0_out = !reset & !C1_endlinereg & !B1_count[3];
+B1_count[3]_p1_out = !reset & C1_endlinereg & B1_count[3] & B1_count[2] & B1_count[1] & B1_count[0];
+B1_count[3]_p2_out = !reset & !B1_count[3] & !B1_count[2];
+B1_count[3]_p3_out = !reset & !B1_count[3] & !B1_count[1];
+B1_count[3]_p4_out = !reset & !B1_count[3] & !B1_count[0];
+B1_count[3]_or_out = A1L61 # B1_count[3]_p0_out # B1_count[3]_p1_out # B1_count[3]_p2_out # B1_count[3]_p3_out # B1_count[3]_p4_out;
+B1_count[3]_reg_input = !(B1_count[3]_or_out);
+B1_count[3] = DFFE(B1_count[3]_reg_input, GLOBAL(clk), , , );
+
+
+--C1L4 is pwm_10bit:inst2|LessThan~774
+C1L4_p0_out = B1_count[6] & B1_count[5] & !B1_count[1] & B1_count[2] & !B1_count[3] & !B1_count[7] & B1_count[4] & B1_count[9] & !B1_count[8] & !B1_count[0] & !B1_count[10];
+C1L4_p2_out = B1_count[6] & B1_count[5] & B1_count[1] & B1_count[2] & !B1_count[3] & !B1_count[7] & B1_count[4] & B1_count[9] & !B1_count[8] & B1_count[0];
+C1L4_p3_out = B1_count[6] & B1_count[5] & B1_count[2] & B1_count[3] & !B1_count[7] & !B1_count[4] & B1_count[9] & !B1_count[8] & B1_count[0];
+C1L4_p4_out = B1_count[6] & B1_count[5] & B1_count[1] & !B1_count[2] & !B1_count[3] & !B1_count[7] & B1_count[4] & B1_count[9] & !B1_count[8] & !B1_count[0] & !B1_count[10];
+C1L4_or_out = C1L41 # C1L4_p0_out # C1L4_p2_out # C1L4_p3_out # C1L4_p4_out;
+C1L4 = !B1_count[0] $ C1L4_or_out;
+
+
+--C1L5 is pwm_10bit:inst2|LessThan~781
+C1L5_p0_out = B1_count[4] & B1_count[9] & B1_count[6] & B1_count[5] & !B1_count[10] & !B1_count[8] & !B1_count[7] & !B1_count[3] & B1_count[1] & !B1_count[2];
+C1L5_p2_out = !B1_count[4] & !B1_count[9] & !B1_count[6] & !B1_count[5] & !B1_count[10] & !B1_count[8] & !B1_count[7] & !B1_count[3] & !B1_count[0] & !B1_count[1];
+C1L5_p3_out = B1_count[4] & B1_count[9] & B1_count[6] & B1_count[5] & !B1_count[10] & !B1_count[8] & !B1_count[7] & !B1_count[3] & B1_count[0] & !B1_count[2];
+C1L5_p4_out = B1_count[4] & B1_count[9] & B1_count[6] & B1_count[5] & !B1_count[10] & !B1_count[8] & !B1_count[7] & !B1_count[3] & !B1_count[1] & B1_count[2];
+C1L5_or_out = C1L51 # C1L5_p0_out # C1L5_p2_out # C1L5_p3_out # C1L5_p4_out;
+C1L5 = J1_dffs[8] $ C1L5_or_out;
+
+
+--C1L6 is pwm_10bit:inst2|LessThan~788
+C1L6_p1_out = !B1_count[0] & !J1_dffs[3];
+C1L6_p0_out = B1_count[8] & !B1_count[0] & !J1_dffs[3] & B1_count[10];
+C1L6_p2_out = B1_count[9] & B1_count[5] & !B1_count[2] & B1_count[6] & B1_count[4] & !B1_count[7] & !B1_count[8] & !B1_count[0] & !J1_dffs[3];
+C1L6_p3_out = B1_count[5] & B1_count[6] & B1_count[7] & !B1_count[0] & !J1_dffs[3] & B1_count[10];
+C1L6_p4_out = B1_count[2] & B1_count[6] & B1_count[4] & B1_count[7] & !B1_count[0] & !J1_dffs[3] & B1_count[10] & B1_count[3] & B1_count[1];
+C1L6_or_out = C1L61 # C1L6_p0_out # C1L6_p2_out # C1L6_p3_out # C1L6_p4_out;
+C1L6 = C1L6_p1_out $ C1L6_or_out;
+
+
+--C1L7 is pwm_10bit:inst2|LessThan~800
+C1L7_p0_out = !J1_dffs[4] & !B1_count[7] & B1_count[6] & B1_count[5] & !B1_count[0] & B1_count[4] & !B1_count[2] & B1_count[9] & !B1_count[8];
+C1L7_p1_out = B1_count[10] & !J1_dffs[4] & B1_count[7] & B1_count[6] & B1_count[5];
+C1L7_p2_out = B1_count[10] & !J1_dffs[4] & B1_count[7] & B1_count[6] & B1_count[3] & B1_count[0] & B1_count[4] & B1_count[2];
+C1L7_p3_out = !J1_dffs[4] & !B1_count[7] & B1_count[6] & B1_count[5] & B1_count[3] & !B1_count[4] & B1_count[2] & B1_count[9] & !B1_count[8];
+C1L7_p4_out = B1_count[10] & !J1_dffs[4] & B1_count[7] & B1_count[6] & B1_count[3] & B1_count[4] & B1_count[2] & B1_count[1];
+C1L7_or_out = C1L81 # C1L7_p0_out # C1L7_p1_out # C1L7_p2_out # C1L7_p3_out # C1L7_p4_out;
+C1L7 = C1L7_or_out;
+
+
+--B1L31 is sync_state:inst|widthreg[3]~332
+B1L31_p1_out = !J1_dffs[5] & !B1_count[0];
+B1L31_p0_out = B1_count[8] & !J1_dffs[5] & !B1_count[0] & B1_count[10];
+B1L31_p2_out = B1_count[9] & B1_count[5] & !B1_count[2] & B1_count[6] & B1_count[4] & !B1_count[7] & !B1_count[8] & !J1_dffs[5] & !B1_count[0];
+B1L31_p3_out = B1_count[5] & B1_count[6] & B1_count[7] & !J1_dffs[5] & !B1_count[0] & B1_count[10];
+B1L31_p4_out = B1_count[2] & B1_count[6] & B1_count[4] & B1_count[7] & !J1_dffs[5] & !B1_count[0] & B1_count[10] & B1_count[3] & B1_count[1];
+B1L31_or_out = B1L41 # B1L31_p0_out # B1L31_p2_out # B1L31_p3_out # B1L31_p4_out;
+B1L31 = B1L31_p1_out $ B1L31_or_out;
+
+
+--C1L8 is pwm_10bit:inst2|LessThan~801
+C1L8_p0_out = !B1_count[8] & !B1_count[4] & !B1_count[7] & B1_count[9] & B1_count[6] & B1_count[5] & B1_count[3] & B1_count[2];
+C1L8_p2_out = B1_count[10] & B1_count[8];
+C1L8_p3_out = !B1_count[8] & B1_count[4] & !B1_count[7] & B1_count[9] & B1_count[6] & B1_count[5] & !B1_count[3];
+C1L8_p4_out = !B1_count[8] & B1_count[4] & !B1_count[7] & B1_count[9] & B1_count[6] & B1_count[5] & !B1_count[2];
+C1L8_or_out = C1L02 # C1L8_p0_out # C1L8_p2_out # C1L8_p3_out # C1L8_p4_out;
+C1L8 = J1_dffs[3] $ C1L8_or_out;
+
+
+--C1L01 is pwm_10bit:inst2|LessThan~814
+C1L01_p0_out = B1_count[7] & B1_count[6] & B1_count[1] & B1_count[4] & B1_count[2] & B1_count[3] & B1_count[10];
+C1L01_p2_out = B1_count[5] & !B1_count[8] & B1_count[9] & !B1_count[7] & B1_count[6] & !B1_count[1] & B1_count[4] & !B1_count[2];
+C1L01_p3_out = B1_count[5] & !B1_count[8] & B1_count[9] & !B1_count[7] & B1_count[6] & !B1_count[4] & B1_count[2] & B1_count[3];
+C1L01_p4_out = B1_count[7] & B1_count[6] & B1_count[4] & B1_count[2] & B1_count[3] & B1_count[10] & B1_count[0];
+C1L01_or_out = C1L22 # C1L01_p0_out # C1L01_p2_out # C1L01_p3_out # C1L01_p4_out;
+C1L01 = J1_dffs[4] $ C1L01_or_out;
+
+
+--C1L11 is pwm_10bit:inst2|LessThan~821
+C1L11_p0_out = !B1_count[8] & !B1_count[4] & !B1_count[7] & B1_count[9] & B1_count[6] & B1_count[5] & B1_count[3] & B1_count[2];
+C1L11_p2_out = B1_count[10] & B1_count[8];
+C1L11_p3_out = !B1_count[8] & B1_count[4] & !B1_count[7] & B1_count[9] & B1_count[6] & B1_count[5] & !B1_count[3];
+C1L11_p4_out = !B1_count[8] & B1_count[4] & !B1_count[7] & B1_count[9] & B1_count[6] & B1_count[5] & !B1_count[2];
+C1L11_or_out = C1L42 # C1L11_p0_out # C1L11_p2_out # C1L11_p3_out # C1L11_p4_out;
+C1L11 = J1_dffs[5] $ C1L11_or_out;
+
+
+--C1L21 is pwm_10bit:inst2|LessThan~833
+C1L21_p0_out = !J1_dffs[2] & !J1_dffs[1] & !J1_dffs[0] & !B1_count[10] & !B1_count[8] & !B1_count[7] & !B1_count[3] & B1_count[4] & B1_count[9] & B1_count[6] & B1_count[5] & !B1_count[1];
+C1L21_p1_out = !B1_count[2] & !J1_dffs[2] & !J1_dffs[1] & !J1_dffs[0] & !B1_count[10] & !B1_count[8] & !B1_count[7] & !B1_count[3] & !B1_count[4] & !B1_count[9] & !B1_count[6] & !B1_count[5];
+C1L21_p2_out = !J1_dffs[2] & !J1_dffs[1] & !J1_dffs[0] & !B1_count[10] & !B1_count[8] & !B1_count[7] & !B1_count[3] & !B1_count[4] & !B1_count[9] & !B1_count[6] & !B1_count[5] & !B1_count[0] & !B1_count[1];
+C1L21_p3_out = B1_count[2] & !J1_dffs[2] & !J1_dffs[1] & !J1_dffs[0] & !B1_count[10] & !B1_count[8] & !B1_count[7] & B1_count[3] & !B1_count[4] & B1_count[9] & B1_count[6] & B1_count[5];
+C1L21_p4_out = !B1_count[2] & !J1_dffs[2] & !J1_dffs[1] & !J1_dffs[0] & !B1_count[10] & !B1_count[8] & !B1_count[7] & !B1_count[3] & B1_count[4] & B1_count[9] & B1_count[6] & B1_count[5];
+C1L21_or_out = C1L21_p0_out # C1L21_p1_out # C1L21_p2_out # C1L21_p3_out # C1L21_p4_out;
+C1L21 = C1L21_or_out;
+
+
+--C1_out is pwm_10bit:inst2|out
+C1_out_p0_out = C1L3 & C1L2 & C1L9;
+C1_out_p2_out = C1L3 & !B1L31 & !C1L11 & C1L9;
+C1_out_p4_out = C1L3 & !B1L31 & C1L1 & !C1L6 & !C1L7 & !C1L21 & C1L9;
+C1_out_or_out = C1_out_p0_out # C1_out_p2_out # C1_out_p4_out;
+C1_out_reg_input = C1L3 $ C1_out_or_out;
+C1_out = DFFE(C1_out_reg_input, GLOBAL(clk), , , !reset);
+
+
+--C1L72 is pwm_10bit:inst2|out~3
+C1L72_or_out = !C1_out;
+C1L72 = C1L72_or_out;
+
+
+--J1L5 is pwm_10bit:inst2|lpm_counter:count_rtl_0|dffs[2]~464
+J1L5_p1_out = !J1_dffs[8] & !reset & J1_dffs[2] & !J1_dffs[1];
+J1L5 = J1L5_p1_out;
+
+
+--J1L7 is pwm_10bit:inst2|lpm_counter:count_rtl_0|dffs[3]~466
+J1L7_p1_out = !J1_dffs[8] & !reset & J1_dffs[2] & J1_dffs[1] & J1_dffs[0];
+J1L7 = J1L7_p1_out;
+
+
+--J1L9 is pwm_10bit:inst2|lpm_counter:count_rtl_0|dffs[4]~468
+J1L9_p1_out = !J1_dffs[8] & !reset & J1_dffs[3] & J1_dffs[2] & J1_dffs[1] & J1_dffs[0];
+J1L9 = J1L9_p1_out;
+
+
+--J1L11 is pwm_10bit:inst2|lpm_counter:count_rtl_0|dffs[5]~470
+J1L11_p1_out = !J1_dffs[8] & !reset & J1_dffs[4] & J1_dffs[3] & J1_dffs[2] & J1_dffs[1] & J1_dffs[0];
+J1L11 = J1L11_p1_out;
+
+
+--A1L7 is rtl~501
+A1L7_p1_out = !B1_count[10] & B1_count[3] & B1_count[2] & B1_count[1] & B1_count[0] & C1_endlinereg & !reset;
+A1L7_p2_out = B1_count[3] & B1_count[2] & B1_count[1] & B1_count[0] & C1_endlinereg & !reset & !B1_count[5] & !B1_count[9] & !B1_count[8];
+A1L7_p3_out = B1_count[3] & B1_count[2] & B1_count[1] & B1_count[0] & C1_endlinereg & !reset & !B1_count[9] & !B1_count[8] & !B1_count[6];
+A1L7_p4_out = B1_count[3] & B1_count[2] & B1_count[1] & B1_count[0] & C1_endlinereg & !reset & !B1_count[9] & !B1_count[8] & !B1_count[7];
+A1L7 = A1L7_p1_out # A1L7_p2_out # A1L7_p3_out # A1L7_p4_out;
+
+
+--A1L8 is rtl~506
+A1L8_p1_out = !B1_count[10] & !reset & C1_endlinereg & !B1_count[0];
+A1L8 = A1L8_p1_out;
+
+
+--A1L9 is rtl~508
+A1L9_p0_out = !reset & B1_count[5] & B1_count[10] & C1_endlinereg & B1_count[6] & B1_count[7] & B1_count[3];
+A1L9_p1_out = reset & !B1_count[5];
+A1L9_p2_out = !reset & B1_count[5] & B1_count[10] & B1_count[1] & C1_endlinereg & B1_count[6] & B1_count[7];
+A1L9_p3_out = !reset & B1_count[5] & B1_count[10] & C1_endlinereg & B1_count[6] & B1_count[7] & B1_count[2];
+A1L9_p4_out = !reset & B1_count[5] & B1_count[10] & C1_endlinereg & B1_count[6] & B1_count[7] & B1_count[0];
+A1L9 = A1L9_p0_out # A1L9_p1_out # A1L9_p2_out # A1L9_p3_out # A1L9_p4_out;
+
+
+--A1L01 is rtl~514
+A1L01_p0_out = !reset & B1_count[6] & B1_count[10] & B1_count[5] & C1_endlinereg & B1_count[7] & B1_count[3];
+A1L01_p1_out = reset & !B1_count[6];
+A1L01_p2_out = !reset & B1_count[6] & B1_count[10] & B1_count[5] & B1_count[1] & C1_endlinereg & B1_count[7];
+A1L01_p3_out = !reset & B1_count[6] & B1_count[10] & B1_count[5] & C1_endlinereg & B1_count[7] & B1_count[2];
+A1L01_p4_out = !reset & B1_count[6] & B1_count[10] & B1_count[5] & C1_endlinereg & B1_count[7] & B1_count[0];
+A1L01 = A1L01_p0_out # A1L01_p1_out # A1L01_p2_out # A1L01_p3_out # A1L01_p4_out;
+
+
+--A1L11 is rtl~520
+A1L11_p1_out = B1_count[7] & !B1_count[4] & !B1_count[9] & !B1_count[8] & !B1_count[3] & !B1_count[0] & !B1_count[2] & !B1_count[1];
+A1L11_p2_out = B1_count[6] & !B1_count[7] & B1_count[5] & B1_count[4] & !B1_count[9] & !B1_count[8] & B1_count[3] & B1_count[0] & B1_count[2] & B1_count[1] & C1_endlinereg;
+A1L11_p3_out = !B1_count[6] & B1_count[7] & !B1_count[9] & !B1_count[8];
+A1L11_p4_out = B1_count[7] & !B1_count[5] & !B1_count[9] & !B1_count[8];
+A1L11 = A1L11_p1_out # A1L11_p2_out # A1L11_p3_out # A1L11_p4_out;
+
+
+--A1L21 is rtl~525
+A1L21_p0_out = B1_count[7] & !C1_endlinereg;
+A1L21_p1_out = !B1_count[10] & B1_count[7] & !B1_count[0];
+A1L21_p2_out = !B1_count[10] & B1_count[7] & !B1_count[1];
+A1L21_p3_out = !B1_count[10] & B1_count[7] & !B1_count[2];
+A1L21_p4_out = !B1_count[10] & !B1_count[3] & B1_count[7];
+A1L21 = A1L11 # A1L21_p0_out # A1L21_p1_out # A1L21_p2_out # A1L21_p3_out # A1L21_p4_out;
+
+
+--A1L31 is rtl~531
+A1L31_p1_out = B1_count[5] & B1_count[6] & B1_count[7] & B1_count[9] & B1_count[8] & B1_count[4] & B1_count[3] & B1_count[0] & B1_count[2] & B1_count[1] & !reset & C1_endlinereg & !B1_count[10];
+A1L31 = A1L31_p1_out;
+
+
+--A1L41 is rtl~533
+A1L41_p1_out = B1_count[5] & B1_count[6] & B1_count[7] & B1_count[10] & C1_endlinereg;
+A1L41_p2_out = B1_count[10] & C1_endlinereg & B1_count[9];
+A1L41 = A1L41_p1_out # A1L41_p2_out;
+
+
+--A1L51 is rtl~536
+A1L51_p1_out = B1_count[5] & B1_count[6] & B1_count[7] & B1_count[10] & C1_endlinereg;
+A1L51_p2_out = B1_count[10] & C1_endlinereg & B1_count[9];
+A1L51_p3_out = B1_count[10] & C1_endlinereg & B1_count[8];
+A1L51 = A1L51_p1_out # A1L51_p2_out # A1L51_p3_out;
+
+
+--A1L61 is rtl~540
+A1L61_p1_out = B1_count[5] & B1_count[6] & B1_count[7] & B1_count[10] & !reset & C1_endlinereg;
+A1L61_p2_out = B1_count[10] & !reset & C1_endlinereg & B1_count[9];
+A1L61_p3_out = B1_count[10] & !reset & C1_endlinereg & B1_count[8];
+A1L61 = A1L61_p1_out # A1L61_p2_out # A1L61_p3_out;
+
+
+--C1L31 is pwm_10bit:inst2|LessThan~841
+C1L31_p1_out = !B1_count[6] & !B1_count[5] & !B1_count[10] & !B1_count[3] & !B1_count[7] & !B1_count[4] & !B1_count[9] & !B1_count[8] & B1_count[0];
+C1L31_p2_out = !B1_count[6] & !B1_count[5] & !B1_count[10] & !B1_count[7] & !B1_count[4] & !B1_count[9] & !B1_count[8] & B1_count[0] & !B1_count[1] & !B1_count[2];
+C1L31 = C1L31_p1_out # C1L31_p2_out;
+
+
+--C1L41 is pwm_10bit:inst2|LessThan~844
+C1L41_p0_out = B1_count[6] & B1_count[5] & !B1_count[7] & B1_count[0] & !B1_count[2] & B1_count[3] & B1_count[4] & B1_count[9] & !B1_count[8] & !B1_count[1];
+C1L41_p1_out = B1_count[6] & B1_count[5] & B1_count[10] & B1_count[7] & B1_count[0];
+C1L41_p2_out = B1_count[6] & B1_count[10] & B1_count[7] & B1_count[0] & B1_count[2] & B1_count[3] & B1_count[4];
+C1L41_p3_out = B1_count[10] & B1_count[0] & B1_count[9];
+C1L41_p4_out = B1_count[10] & B1_count[0] & B1_count[8];
+C1L41 = C1L31 # C1L41_p0_out # C1L41_p1_out # C1L41_p2_out # C1L41_p3_out # C1L41_p4_out;
+
+
+--C1L51 is pwm_10bit:inst2|LessThan~850
+C1L51_p1_out = !B1_count[4] & !B1_count[9] & !B1_count[6] & !B1_count[5] & !B1_count[2] & !B1_count[10] & !B1_count[8] & !B1_count[7] & !B1_count[3];
+C1L51 = C1L51_p1_out;
+
+
+--C1L61 is pwm_10bit:inst2|LessThan~852
+C1L61_p0_out = B1_count[9] & B1_count[5] & !B1_count[3] & B1_count[6] & B1_count[4] & !B1_count[7] & !B1_count[8] & !B1_count[0] & !J1_dffs[3];
+C1L61_p1_out = !B1_count[9] & !B1_count[5] & !B1_count[3] & !B1_count[6] & !B1_count[4] & !B1_count[7] & !B1_count[10] & !B1_count[8] & !B1_count[0] & !J1_dffs[3];
+C1L61_p2_out = !B1_count[9] & !B1_count[5] & !B1_count[6] & !B1_count[4] & !B1_count[7] & !B1_count[10] & !B1_count[8] & !B1_count[0] & !J1_dffs[3] & !B1_count[2] & !B1_count[1];
+C1L61_p3_out = B1_count[9] & B1_count[10] & !B1_count[0] & !J1_dffs[3];
+C1L61_p4_out = B1_count[9] & B1_count[5] & B1_count[3] & B1_count[6] & !B1_count[4] & !B1_count[7] & !B1_count[8] & !B1_count[0] & !J1_dffs[3] & B1_count[2];
+C1L61 = C1L61_p0_out # C1L61_p1_out # C1L61_p2_out # C1L61_p3_out # C1L61_p4_out;
+
+
+--C1L71 is pwm_10bit:inst2|LessThan~858
+C1L71_p1_out = !B1_count[10] & !B1_count[3] & !J1_dffs[4] & !B1_count[4] & !B1_count[7] & !B1_count[9] & !B1_count[6] & !B1_count[5] & !B1_count[8];
+C1L71 = C1L71_p1_out;
+
+
+--C1L81 is pwm_10bit:inst2|LessThan~860
+C1L81_p0_out = B1_count[10] & !J1_dffs[4] & B1_count[8];
+C1L81_p1_out = !B1_count[10] & !B1_count[1] & !J1_dffs[4] & !B1_count[4] & !B1_count[7] & !B1_count[9] & !B1_count[6] & !B1_count[5] & !B1_count[2] & !B1_count[8];
+C1L81_p2_out = B1_count[10] & !J1_dffs[4] & B1_count[9];
+C1L81_p3_out = !J1_dffs[4] & B1_count[4] & !B1_count[7] & B1_count[9] & B1_count[6] & B1_count[5] & !B1_count[8] & !B1_count[3];
+C1L81_p4_out = !B1_count[1] & !J1_dffs[4] & B1_count[4] & !B1_count[7] & B1_count[9] & B1_count[6] & B1_count[5] & !B1_count[2] & !B1_count[8];
+C1L81 = C1L71 # C1L81_p0_out # C1L81_p1_out # C1L81_p2_out # C1L81_p3_out # C1L81_p4_out;
+
+
+--B1L41 is sync_state:inst|widthreg[3]~339
+B1L41_p0_out = B1_count[9] & B1_count[5] & !B1_count[3] & B1_count[6] & B1_count[4] & !B1_count[7] & !B1_count[8] & !J1_dffs[5] & !B1_count[0];
+B1L41_p1_out = !B1_count[9] & !B1_count[5] & !B1_count[3] & !B1_count[6] & !B1_count[4] & !B1_count[7] & !B1_count[8] & !B1_count[10] & !J1_dffs[5] & !B1_count[0];
+B1L41_p2_out = !B1_count[9] & !B1_count[5] & !B1_count[6] & !B1_count[4] & !B1_count[7] & !B1_count[8] & !B1_count[10] & !J1_dffs[5] & !B1_count[0] & !B1_count[2] & !B1_count[1];
+B1L41_p3_out = B1_count[9] & B1_count[10] & !J1_dffs[5] & !B1_count[0];
+B1L41_p4_out = B1_count[9] & B1_count[5] & B1_count[3] & B1_count[6] & !B1_count[4] & !B1_count[7] & !B1_count[8] & !J1_dffs[5] & !B1_count[0] & B1_count[2];
+B1L41 = B1L41_p0_out # B1L41_p1_out # B1L41_p2_out # B1L41_p3_out # B1L41_p4_out;
+
+
+--C1L91 is pwm_10bit:inst2|LessThan~866
+C1L91 = B1_count[0];
+
+
+--C1L02 is pwm_10bit:inst2|LessThan~868
+C1L02_p0_out = B1_count[10] & B1_count[9];
+C1L02_p1_out = !B1_count[10] & !B1_count[4] & !B1_count[7] & !B1_count[9] & !B1_count[6] & !B1_count[5] & !B1_count[3] & !B1_count[8];
+C1L02_p2_out = !B1_count[10] & !B1_count[4] & !B1_count[7] & !B1_count[9] & !B1_count[6] & !B1_count[5] & !B1_count[8] & !B1_count[1] & !B1_count[2];
+C1L02_p3_out = B1_count[10] & B1_count[7] & B1_count[6] & B1_count[5];
+C1L02_p4_out = B1_count[10] & B1_count[4] & B1_count[7] & B1_count[6] & B1_count[3] & B1_count[1] & B1_count[2];
+C1L02 = C1L91 # C1L02_p0_out # C1L02_p1_out # C1L02_p2_out # C1L02_p3_out # C1L02_p4_out;
+
+
+--C1L12 is pwm_10bit:inst2|LessThan~874
+C1L12_p1_out = B1_count[8] & B1_count[10];
+C1L12_p2_out = B1_count[10] & B1_count[9];
+C1L12 = C1L12_p1_out # C1L12_p2_out;
+
+
+--C1L22 is pwm_10bit:inst2|LessThan~877
+C1L22_p0_out = B1_count[5] & !B1_count[8] & B1_count[9] & !B1_count[7] & B1_count[6] & B1_count[4] & !B1_count[2] & !B1_count[0];
+C1L22_p1_out = !B1_count[5] & !B1_count[8] & !B1_count[9] & !B1_count[7] & !B1_count[10] & !B1_count[6] & !B1_count[4] & !B1_count[3];
+C1L22_p2_out = !B1_count[5] & !B1_count[8] & !B1_count[9] & !B1_count[7] & !B1_count[10] & !B1_count[6] & !B1_count[4] & !B1_count[1] & !B1_count[2];
+C1L22_p3_out = B1_count[5] & B1_count[7] & B1_count[10] & B1_count[6];
+C1L22_p4_out = B1_count[5] & !B1_count[8] & B1_count[9] & !B1_count[7] & B1_count[6] & B1_count[4] & !B1_count[3];
+C1L22 = C1L12 # C1L22_p0_out # C1L22_p1_out # C1L22_p2_out # C1L22_p3_out # C1L22_p4_out;
+
+
+--C1L32 is pwm_10bit:inst2|LessThan~883
+C1L32 = B1_count[0];
+
+
+--C1L42 is pwm_10bit:inst2|LessThan~885
+C1L42_p0_out = B1_count[10] & B1_count[9];
+C1L42_p1_out = !B1_count[10] & !B1_count[4] & !B1_count[7] & !B1_count[9] & !B1_count[6] & !B1_count[5] & !B1_count[3] & !B1_count[8];
+C1L42_p2_out = !B1_count[10] & !B1_count[4] & !B1_count[7] & !B1_count[9] & !B1_count[6] & !B1_count[5] & !B1_count[8] & !B1_count[1] & !B1_count[2];
+C1L42_p3_out = B1_count[10] & B1_count[7] & B1_count[6] & B1_count[5];
+C1L42_p4_out = B1_count[10] & B1_count[4] & B1_count[7] & B1_count[6] & B1_count[3] & B1_count[1] & B1_count[2];
+C1L42 = C1L32 # C1L42_p0_out # C1L42_p1_out # C1L42_p2_out # C1L42_p3_out # C1L42_p4_out;
+
+
+--C1L82 is pwm_10bit:inst2|reduce_nor~21sexpbal
+C1L82_p1_out = J1_dffs[2] & J1_dffs[1] & J1_dffs[0];
+C1L82_p2_out = !B1_count[3] & !B1_count[2] & !B1_count[10] & !B1_count[9] & !B1_count[6] & !B1_count[5] & !B1_count[4] & !B1_count[8] & !B1_count[7];
+C1L82_p3_out = !B1_count[3] & !B1_count[10] & !B1_count[9] & !B1_count[6] & !B1_count[5] & !B1_count[4] & !B1_count[8] & !B1_count[7] & !B1_count[1] & !B1_count[0];
+C1L82_or_out = C1L82_p1_out # C1L82_p2_out # C1L82_p3_out;
+C1L82 = !(C1L82_or_out);
+
+
+--C1L9 is pwm_10bit:inst2|LessThan~813sexp1bal
+C1L9_p0_out = !J1_dffs[8] & B1_count[4] & B1_count[9] & B1_count[6] & B1_count[5] & !B1_count[2] & !B1_count[10] & !B1_count[8] & !B1_count[7] & !B1_count[3] & B1_count[1];
+C1L9_p1_out = !J1_dffs[8] & !B1_count[4] & !B1_count[9] & !B1_count[6] & !B1_count[5] & !B1_count[2] & !B1_count[10] & !B1_count[8] & !B1_count[7] & !B1_count[3];
+C1L9_p2_out = !J1_dffs[8] & !B1_count[4] & !B1_count[9] & !B1_count[6] & !B1_count[5] & !B1_count[10] & !B1_count[8] & !B1_count[7] & !B1_count[3] & !B1_count[0] & !B1_count[1];
+C1L9_p3_out = !J1_dffs[8] & B1_count[4] & B1_count[9] & B1_count[6] & B1_count[5] & !B1_count[2] & !B1_count[10] & !B1_count[8] & !B1_count[7] & !B1_count[3] & B1_count[0];
+C1L9_p4_out = !J1_dffs[8] & B1_count[4] & B1_count[9] & B1_count[6] & B1_count[5] & B1_count[2] & !B1_count[10] & !B1_count[8] & !B1_count[7] & !B1_count[3] & !B1_count[1];
+C1L9_or_out = C1L9_p0_out # C1L9_p1_out # C1L9_p2_out # C1L9_p3_out # C1L9_p4_out;
+C1L9 = !(C1L9_or_out);
+
+
+--C1L2 is pwm_10bit:inst2|LessThan~771bal
+C1L2_p1_out = !C1L5 & !J1_dffs[7] & !J1_dffs[6];
+C1L2_or_out = C1L2_p1_out;
+C1L2 = !(C1L2_or_out);
+
+
+--C1L3 is pwm_10bit:inst2|LessThan~772bal
+C1L3_p1_out = !C1L6 & !C1L7 & !B1L31 & !C1L8 & C1L9;
+C1L3_p2_out = !C1L7 & !B1L31 & C1L9 & C1L01;
+C1L3_or_out = C1L3_p1_out # C1L3_p2_out;
+C1L3 = !(C1L3_or_out);
+
+
+--C1L1 is pwm_10bit:inst2|LessThan~770bal
+C1L1_p1_out = C1L4 & C1L82;
+C1L1_or_out = C1L1_p1_out;
+C1L1 = !(C1L1_or_out);
+
+
+--clk is clk
+--operation mode is input
+
+clk = INPUT();
+
+
+--reset is reset
+--operation mode is input
+
+reset = INPUT();
+
+
+--osc_in is osc_in
+--operation mode is input
+
+osc_in = INPUT();
+
+
+--osc_out is osc_out
+--operation mode is output
+
+osc_out = OUTPUT(A1L4);
+
+
+--sync is sync
+--operation mode is output
+
+sync = OUTPUT(C1_out);
+
+
+--not_sync is not_sync
+--operation mode is output
+
+not_sync = OUTPUT(C1L72);
+
+

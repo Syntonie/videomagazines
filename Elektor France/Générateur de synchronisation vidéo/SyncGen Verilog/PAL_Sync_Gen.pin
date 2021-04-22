@@ -1,0 +1,144 @@
+ -- Copyright (C) 1991-2005 Altera Corporation
+ -- Any  megafunction  design,  and related netlist (encrypted  or  decrypted),
+ -- support information,  device programming or simulation file,  and any other
+ -- associated  documentation or information  provided by  Altera  or a partner
+ -- under  Altera's   Megafunction   Partnership   Program  may  be  used  only
+ -- to program  PLD  devices (but not masked  PLD  devices) from  Altera.   Any
+ -- other  use  of such  megafunction  design,  netlist,  support  information,
+ -- device programming or simulation file,  or any other  related documentation
+ -- or information  is prohibited  for  any  other purpose,  including, but not
+ -- limited to  modification,  reverse engineering,  de-compiling, or use  with
+ -- any other  silicon devices,  unless such use is  explicitly  licensed under
+ -- a separate agreement with  Altera  or a megafunction partner.  Title to the
+ -- intellectual property,  including patents,  copyrights,  trademarks,  trade
+ -- secrets,  or maskworks,  embodied in any such megafunction design, netlist,
+ -- support  information,  device programming or simulation file,  or any other
+ -- related documentation or information provided by  Altera  or a megafunction
+ -- partner, remains with Altera, the megafunction partner, or their respective
+ -- licensors. No other licenses, including any licenses needed under any third
+ -- party's intellectual property, are provided herein.
+ -- 
+ -- This is a Quartus II output file. It is for reporting purposes only, and is
+ -- not intended for use as a Quartus II input file. This file cannot be used
+ -- to make Quartus II pin assignments - for instructions on how to make pin
+ -- assignments, please see Quartus II help.
+ ---------------------------------------------------------------------------------
+
+
+
+ ---------------------------------------------------------------------------------
+ -- NC            : No Connect. This pin has no internal connection to the device.
+ -- VCC           : Dedicated power pin, which MUST be connected to VCC.
+ -- VCCIO         : Dedicated power pin, which MUST be connected to VCC
+ --                 of its bank.
+ -- GND           : Dedicated ground pin. Dedicated GND pins MUST be connected to GND.
+ --					It can also be used to report unused dedicated pins. The connection
+ --					on the board for unused dedicated pins depends on whether this will
+ --					be used in a future design. One example is device migration. When
+ --					using device migration, refer to the device pin-tables. If it is a
+ --					GND pin in the pin table or if it will not be used in a future design
+ --					for another purpose the it MUST be connected to GND. If it is an unused
+ --					dedicated pin, then it can be connected to a valid signal on the board
+ --					(low, high, or toggling) if that signal is required for a different
+ --					revision of the design.
+ -- GND+          : Unused input pin. It can also be used to report unused dual-purpose pins.
+ --					This pin should be connected to GND. It may also be connected  to a
+ --					valid signal  on the board  (low, high, or toggling)  if that signal
+ --					is required for a different revision of the design.
+ -- GND*          : Unused  I/O  pin.   This pin can either be left unconnected or
+ --           	    connected to GND.  Connecting this pin to GND will improve the
+ --           	    device's immunity to noise.
+ -- RESERVED      : Unused I/O pin, which MUST be left unconnected.
+ -- RESERVED_INPUT    : Pin is tri-stated and should be connected to the board.
+ -- NON_MIGRATABLE: This pin cannot be migrated.
+ ---------------------------------------------------------------------------------
+
+Quartus II Version 4.2 Build 178 01/19/2005 Service Pack 1 SJ Web Edition
+CHIP  "PAL_Sync_Gen"  ASSIGNED TO AN: EPM7128SLC84-10
+
+Pin Name/Usage               : Location  : Dir.   : I/O Standard      : Voltage : I/O Bank  : User Assignment
+-------------------------------------------------------------------------------------------------------------
+GND+                         : 1         :        :                   :         :           :                
+GND+                         : 2         :        :                   :         :           :                
+VCCINT                       : 3         : power  :                   : 5.0V    :           :                
+RESERVED_INPUT               : 4         :        :                   :         :           :                
+RESERVED_INPUT               : 5         :        :                   :         :           :                
+RESERVED_INPUT               : 6         :        :                   :         :           :                
+GND                          : 7         : gnd    :                   :         :           :                
+RESERVED_INPUT               : 8         :        :                   :         :           :                
+RESERVED_INPUT               : 9         :        :                   :         :           :                
+RESERVED_INPUT               : 10        :        :                   :         :           :                
+RESERVED_INPUT               : 11        :        :                   :         :           :                
+RESERVED_INPUT               : 12        :        :                   :         :           :                
+VCCIO                        : 13        : power  :                   : 5.0V    :           :                
+TDI                          : 14        : input  : TTL               :         :           : N              
+RESERVED_INPUT               : 15        :        :                   :         :           :                
+RESERVED_INPUT               : 16        :        :                   :         :           :                
+RESERVED_INPUT               : 17        :        :                   :         :           :                
+RESERVED_INPUT               : 18        :        :                   :         :           :                
+GND                          : 19        : gnd    :                   :         :           :                
+not_sync                     : 20        : output : TTL               :         :           : Y              
+RESERVED_INPUT               : 21        :        :                   :         :           :                
+sync                         : 22        : output : TTL               :         :           : Y              
+TMS                          : 23        : input  : TTL               :         :           : N              
+reset                        : 24        : input  : TTL               :         :           : Y              
+RESERVED_INPUT               : 25        :        :                   :         :           :                
+VCCIO                        : 26        : power  :                   : 5.0V    :           :                
+RESERVED_INPUT               : 27        :        :                   :         :           :                
+RESERVED_INPUT               : 28        :        :                   :         :           :                
+RESERVED_INPUT               : 29        :        :                   :         :           :                
+RESERVED_INPUT               : 30        :        :                   :         :           :                
+RESERVED_INPUT               : 31        :        :                   :         :           :                
+GND                          : 32        : gnd    :                   :         :           :                
+RESERVED_INPUT               : 33        :        :                   :         :           :                
+RESERVED_INPUT               : 34        :        :                   :         :           :                
+RESERVED_INPUT               : 35        :        :                   :         :           :                
+RESERVED_INPUT               : 36        :        :                   :         :           :                
+RESERVED_INPUT               : 37        :        :                   :         :           :                
+VCCIO                        : 38        : power  :                   : 5.0V    :           :                
+RESERVED_INPUT               : 39        :        :                   :         :           :                
+RESERVED_INPUT               : 40        :        :                   :         :           :                
+RESERVED_INPUT               : 41        :        :                   :         :           :                
+GND                          : 42        : gnd    :                   :         :           :                
+VCCINT                       : 43        : power  :                   : 5.0V    :           :                
+RESERVED_INPUT               : 44        :        :                   :         :           :                
+RESERVED_INPUT               : 45        :        :                   :         :           :                
+RESERVED_INPUT               : 46        :        :                   :         :           :                
+GND                          : 47        : gnd    :                   :         :           :                
+RESERVED_INPUT               : 48        :        :                   :         :           :                
+RESERVED_INPUT               : 49        :        :                   :         :           :                
+RESERVED_INPUT               : 50        :        :                   :         :           :                
+RESERVED_INPUT               : 51        :        :                   :         :           :                
+RESERVED_INPUT               : 52        :        :                   :         :           :                
+VCCIO                        : 53        : power  :                   : 5.0V    :           :                
+RESERVED_INPUT               : 54        :        :                   :         :           :                
+RESERVED_INPUT               : 55        :        :                   :         :           :                
+RESERVED_INPUT               : 56        :        :                   :         :           :                
+RESERVED_INPUT               : 57        :        :                   :         :           :                
+RESERVED_INPUT               : 58        :        :                   :         :           :                
+GND                          : 59        : gnd    :                   :         :           :                
+RESERVED_INPUT               : 60        :        :                   :         :           :                
+RESERVED_INPUT               : 61        :        :                   :         :           :                
+TCK                          : 62        : input  : TTL               :         :           : N              
+RESERVED_INPUT               : 63        :        :                   :         :           :                
+RESERVED_INPUT               : 64        :        :                   :         :           :                
+RESERVED_INPUT               : 65        :        :                   :         :           :                
+VCCIO                        : 66        : power  :                   : 5.0V    :           :                
+RESERVED_INPUT               : 67        :        :                   :         :           :                
+RESERVED_INPUT               : 68        :        :                   :         :           :                
+RESERVED_INPUT               : 69        :        :                   :         :           :                
+RESERVED_INPUT               : 70        :        :                   :         :           :                
+TDO                          : 71        : output : TTL               :         :           : N              
+GND                          : 72        : gnd    :                   :         :           :                
+RESERVED_INPUT               : 73        :        :                   :         :           :                
+RESERVED_INPUT               : 74        :        :                   :         :           :                
+RESERVED_INPUT               : 75        :        :                   :         :           :                
+RESERVED_INPUT               : 76        :        :                   :         :           :                
+RESERVED_INPUT               : 77        :        :                   :         :           :                
+VCCIO                        : 78        : power  :                   : 5.0V    :           :                
+osc_in                       : 79        : input  : TTL               :         :           : Y              
+RESERVED_INPUT               : 80        :        :                   :         :           :                
+osc_out                      : 81        : output : TTL               :         :           : Y              
+GND                          : 82        : gnd    :                   :         :           :                
+clk                          : 83        : input  : TTL               :         :           : Y              
+GND+                         : 84        :        :                   :         :           :                

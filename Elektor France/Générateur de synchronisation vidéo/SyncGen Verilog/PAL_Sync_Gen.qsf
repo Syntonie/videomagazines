@@ -1,0 +1,105 @@
+# Copyright (C) 1991-2005 Altera Corporation
+# Any  megafunction  design,  and related netlist (encrypted  or  decrypted),
+# support information,  device programming or simulation file,  and any other
+# associated  documentation or information  provided by  Altera  or a partner
+# under  Altera's   Megafunction   Partnership   Program  may  be  used  only
+# to program  PLD  devices (but not masked  PLD  devices) from  Altera.   Any
+# other  use  of such  megafunction  design,  netlist,  support  information,
+# device programming or simulation file,  or any other  related documentation
+# or information  is prohibited  for  any  other purpose,  including, but not
+# limited to  modification,  reverse engineering,  de-compiling, or use  with
+# any other  silicon devices,  unless such use is  explicitly  licensed under
+# a separate agreement with  Altera  or a megafunction partner.  Title to the
+# intellectual property,  including patents,  copyrights,  trademarks,  trade
+# secrets,  or maskworks,  embodied in any such megafunction design, netlist,
+# support  information,  device programming or simulation file,  or any other
+# related documentation or information provided by  Altera  or a megafunction
+# partner, remains with Altera, the megafunction partner, or their respective
+# licensors. No other licenses, including any licenses needed under any third
+# party's intellectual property, are provided herein.
+
+
+# The default values for assignments are stored in the file
+#		PAL_Sync_Gen_assignment_defaults.qdf
+# If this file doesn't exist, and for assignments not listed, see file
+#		assignment_defaults.qdf
+
+# Altera recommends that you do not modify this file. This
+# file is updated automatically by the Quartus II software
+# and any changes you make may be lost or overwritten.
+
+
+# Project-Wide Assignments
+# ========================
+set_global_assignment -name ORIGINAL_QUARTUS_VERSION "4.2 SP1"
+set_global_assignment -name PROJECT_CREATION_TIME_DATE "08:58:30  APRIL 11, 2005"
+set_global_assignment -name LAST_QUARTUS_VERSION "4.2 SP1"
+set_global_assignment -name BDF_FILE Sync_Main.bdf
+set_global_assignment -name VERILOG_FILE sync_state.v
+set_global_assignment -name VERILOG_FILE pwm_10bit.v
+set_global_assignment -name VECTOR_WAVEFORM_FILE PAL_Sync_Gen.vwf
+
+# Pin & Location Assignments
+# ==========================
+set_location_assignment PIN_83 -to clk
+set_location_assignment PIN_79 -to osc_in
+set_location_assignment PIN_81 -to osc_out
+set_location_assignment PIN_24 -to reset
+set_location_assignment PIN_22 -to sync
+set_location_assignment PIN_20 -to not_sync
+
+# Analysis & Synthesis Assignments
+# ================================
+set_global_assignment -name FAMILY MAX7000S
+set_global_assignment -name TOP_LEVEL_ENTITY Sync_Main
+
+# Fitter Assignments
+# ==================
+set_global_assignment -name DEVICE "EPM7128SLC84-10"
+set_global_assignment -name OPTIMIZE_HOLD_TIMING OFF
+set_global_assignment -name FITTER_EFFORT "STANDARD FIT"
+set_global_assignment -name ERROR_CHECK_FREQUENCY_DIVISOR 1
+set_global_assignment -name MAX7000_DEVICE_IO_STANDARD TTL
+
+# Assembler Assignments
+# =====================
+set_global_assignment -name RESERVE_ALL_UNUSED_PINS_NO_OUTPUT_GND "AS INPUT TRI-STATED"
+
+# Simulator Assignments
+# =====================
+set_global_assignment -name END_TIME "100 us"
+
+# Programmer Assignments
+# ======================
+set_global_assignment -name GENERATE_SVF_FILE ON
+set_global_assignment -name GENERATE_ISC_FILE OFF
+
+# -------------------
+# start CLOCK(system)
+
+	# Timing Assignments
+	# ==================
+	set_global_assignment -name FMAX_REQUIREMENT "10.0 MHz" -section_id system
+
+# end CLOCK(system)
+# -----------------
+
+# -----------------------
+# start TIMEGROUP(system)
+
+	# Timing Group Assignments
+	# ========================
+	set_global_assignment -name TIMEGROUP_MEMBER clk -section_id system
+
+# end TIMEGROUP(system)
+# ---------------------
+
+# -----------------------
+# start ENTITY(Sync_Main)
+
+	# Timing Assignments
+	# ==================
+	set_instance_assignment -name CLOCK_SETTINGS system -to clk
+
+# end ENTITY(Sync_Main)
+# ---------------------
